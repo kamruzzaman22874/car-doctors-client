@@ -7,14 +7,17 @@ const Bookings = () => {
     const [bookings, setBookings] = useState([])
     const url = `http://localhost:5000/bookings?email=${user?.email}`
     useEffect(() => {
-        fetch(url)
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("car-access-token")}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setBookings(data)
             })
     }, [url])
-
-
 
 
     const handleDelete = (id) => {
@@ -89,7 +92,7 @@ const Bookings = () => {
         });
     }
     return (
-        <div>
+        <div className="my-10">
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

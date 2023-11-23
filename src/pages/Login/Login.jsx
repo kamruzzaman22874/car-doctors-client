@@ -13,25 +13,38 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
         userSignin(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user)
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Login has been done",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate(from, { replace: true });
+                const loggedUser = {
+                    email: user?.email
+                }
+                fetch("http://localhost:5000/jwt", {
+                    method: 'POST',
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(loggedUser),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem("car-access-token", data.token)
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Login has been done",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        navigate(from, { replace: true });
+                    })
+
             })
             .catch(err => console.log(err));
 
     }
     return (
-        <div className="hero min-h-screen bg-base-200 my-20">
+        <div className="hero min-h-screen bg-base-200 my-10">
             <div className="hero-content flex-col lg:flex-row justify-between">
                 <div className="w-1/2 mr-24">
                     <img src={login} alt="" />
