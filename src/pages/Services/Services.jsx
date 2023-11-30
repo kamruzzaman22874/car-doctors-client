@@ -10,7 +10,7 @@ const Services = () => {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        fetch(`http://localhost:5000/services?search=${search}&sort=${assending ? "assending" : "dessending"}`)
+        fetch(`https://car-doctors-server-pink.vercel.app/services?search=${search}&sort=${assending ? "assending" : "dessending"}`)
             .then(res => res.json())
             .then(data => {
                 setServices(data);
