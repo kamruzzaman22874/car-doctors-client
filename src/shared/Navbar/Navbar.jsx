@@ -8,7 +8,6 @@ const Navbar = () => {
     const handleLogout = () => {
         logOut()
             .then(() => {
-                localStorage.removeItem("car-access-token")
             })
             .catch(err => console.log(err))
     }
@@ -24,7 +23,7 @@ const Navbar = () => {
         </>
 
     return (
-        <div className="navbar bg-base-100 h-20 fixed top-0 z-10">
+        <div className="navbar bg-base-100 h-20 fixed top-0 z-10 px-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">

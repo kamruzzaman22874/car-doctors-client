@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../../assets/images/login/login.svg"
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
-import Swal from "sweetalert2";
+import SocilaLogin from "../../shared/SocilaLogin/SocilaLogin";
 const Login = () => {
     const { userSignin } = useContext(AuthContext)
     const location = useLocation();
@@ -16,28 +16,8 @@ const Login = () => {
         userSignin(email, password)
             .then(result => {
                 const user = result.user;
-                const loggedUser = {
-                    email: user?.email
-                }
-                fetch("http://localhost:5000/jwt", {
-                    method: 'POST',
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify(loggedUser),
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        localStorage.setItem("car-access-token", data.token)
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Login has been done",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        navigate(from, { replace: true });
-                    })
+                console.log(user)
+                navigate(from, { replace: true });
 
             })
             .catch(err => console.log(err));
@@ -71,6 +51,7 @@ const Login = () => {
                         </form>
                         <p className="text-center mt-3">Do not have an Account? <Link className="underline text-orange-500 font-bold" to="/signup">Sign up</Link> </p>
                     </div>
+                    <SocilaLogin />
                 </div>
             </div>
         </div>

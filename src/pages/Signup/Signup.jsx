@@ -3,6 +3,7 @@ import login from "../../assets/images/login/login.svg"
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import Swal from "sweetalert2";
+import SocilaLogin from "../../shared/SocilaLogin/SocilaLogin";
 
 const Signup = () => {
     const { createUser } = useContext(AuthContext)
@@ -63,6 +64,7 @@ const Signup = () => {
                         </form>
                         <p className="text-center mt-3">Already have an Account? <Link className="underline text-orange-500 font-bold" to="/login">Login</Link> </p>
                     </div>
+                    <SocilaLogin />
                 </div>
             </div>
         </div>
